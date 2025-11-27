@@ -21,6 +21,7 @@ function writeFile(content, outputPath, filename) {
 export class WebpackGitInfoPlugin {
   constructor(options = {}) {
     this.filename = options.filename || 'git.info';
+    this.outputDir = options.outputDir; // 自定义输出目录
   }
 
   apply(compiler) {
@@ -28,8 +29,8 @@ export class WebpackGitInfoPlugin {
     compiler.hooks.afterEmit.tap(PLUGIN_NAME, (compilation) => {
       try {
         const content = generateGitInfoContent();
-        // 获取 Webpack 的输出目录
-        const outputPath = compiler.options.output.path;
+        // 优先使用用户指定的输出目录，否则使用 Webpack 配置的输出目录
+        const outputPath = this.outputDir || compiler.options.output.path;
         writeFile(content, outputPath, this.filename);
       } catch (e) {
         compilation.errors.push(new Error(`[${PLUGIN_NAME}] Execution error: ${e.message}`));
@@ -41,7 +42,7 @@ export class WebpackGitInfoPlugin {
 // --- Vite/Rollup 插件实现 ---
 export function viteGitInfoPlugin(options = {}) {
   const filename = options.filename || 'git.info';
-  let outputPath = 'dist';
+  let outputPath = options.outputDir; // 优先使用用户指定的输出目录
 
   return {
     name: 'generate-git-info-vite',
@@ -49,8 +50,10 @@ export function viteGitInfoPlugin(options = {}) {
 
     // configResolved 钩子用于获取配置信息
     configResolved(config) {
-      // 从 Vite 配置中获取最终的输出目录
-      outputPath = config.build.outDir || 'dist';
+      // 如果用户没有指定 outputDir，则从 Vite 配置中获取
+      if (!outputPath) {
+        outputPath = config.build.outDir || 'dist';
+      }
     },
 
     // closeBundle 钩子在所有打包工作完成后执行
