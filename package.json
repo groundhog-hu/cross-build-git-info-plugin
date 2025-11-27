@@ -1,0 +1,30 @@
+{
+  "name": "git-info-plugin",
+  "version": "1.0.0",
+  "description": "一个跨平台的 Webpack 和 Vite 插件，用于在项目打包后，在输出目录中生成一个详细的 `git.info` 文件。",
+  "main": "dist/index.cjs",
+  "type": "commonjs",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rollup -c",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "webpack",
+    "vite",
+    "rollup",
+    "plugin",
+    "git",
+    "version",
+    "build-info"
+  ],
+  "author": "groundhog",
+  "license": "MIT",
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^29.0.0",
+    "@rollup/plugin-node-resolve": "^16.0.3",
+    "rollup": "^4.53.3"
+  }
+}
