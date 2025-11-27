@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "一个跨平台的 Webpack 和 Vite 插件，用于在项目打包后，在输出目录中生成一个详细的 `git.info` 文件。",
   "main": "dist/index.cjs",
-  "type": "commonjs",
+  "type": "module",
   "files": [
     "dist"
   ],
