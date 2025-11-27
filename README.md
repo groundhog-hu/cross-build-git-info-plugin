@@ -1,4 +1,4 @@
-# git-info-plugin
+# cross-build-git-info-plugin
 
 一个跨平台的 Webpack 和 Vite 插件，用于在项目打包后，在输出目录中生成一个详细的 `git.info` 文件。
 
@@ -6,7 +6,7 @@
 
 在企业级开发中，我们经常面临私有化部署业务过多的问题。随着时间的推移，很难追踪某个特定环境部署的是哪个代码仓库的哪个分支或版本。
 
-`git-info-plugin` 旨在解决这个问题。它会在构建产物中自动生成一个包含详细 Git 信息的文件，方便运维和开发人员快速定位线上代码版本。
+`cross-build-git-info-plugin` 旨在解决这个问题。它会在构建产物中自动生成一个包含详细 Git 信息的文件，方便运维和开发人员快速定位线上代码版本。
 
 ## ✨ 特性
 
@@ -18,7 +18,7 @@
 ## 📦 安装
 
 ```bash
-npm install --save-dev git-info-plugin
+npm install --save-dev cross-build-git-info-plugin
 ```
 
 ## 🚀 使用方法
@@ -28,7 +28,7 @@ npm install --save-dev git-info-plugin
 在 `webpack.config.js` 中引入并配置插件：
 
 ```javascript
-const { WebpackGitInfoPlugin } = require('git-info-plugin');
+const { WebpackGitInfoPlugin } = require('cross-build-git-info-plugin');
 
 module.exports = {
   // ... 其他配置
@@ -46,7 +46,7 @@ module.exports = {
 在 `vite.config.js` 或 `rollup.config.js` 中引入并配置插件：
 
 ```javascript
-import { viteGitInfoPlugin } from 'git-info-plugin';
+import { viteGitInfoPlugin } from 'cross-build-git-info-plugin';
 
 export default {
   // ... 其他配置
