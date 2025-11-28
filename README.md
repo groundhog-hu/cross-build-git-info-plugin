@@ -13,7 +13,7 @@
 * **跨平台支持:** 同时兼容 Webpack 和 Vite/Rollup。
 * **格式统一:** 输出格式为 `key=value`，易于被后端服务或运维工具读取。
 * **信息丰富:** 包含分支、Commit Hash、提交人、构建时间等详细信息。
-* **零配置:** 开箱即用，同时也支持自定义文件名。
+* **零配置:** 开箱即用，同时也支持自定义文件名和输出目录。
 
 ## 📦 安装
 
@@ -35,7 +35,9 @@ module.exports = {
   plugins: [
     new WebpackGitInfoPlugin({
       // 可选：自定义输出文件名，默认为 'git.info'
-      filename: 'version.txt' 
+      filename: 'version.txt',
+      // 可选：自定义输出目录，默认使用 Webpack 配置的 output.path
+      outputDir: 'dist' // 适用于 Nuxt 2 等框架，可指定确切的输出目录
     })
   ]
 };
@@ -53,11 +55,20 @@ export default {
   plugins: [
     viteGitInfoPlugin({
       // 可选：自定义输出文件名，默认为 'git.info'
-      filename: 'version.txt' 
+      filename: 'version.txt',
+      // 可选：自定义输出目录，默认使用 Vite 配置的 build.outDir
+      outputDir: 'dist' // 适用于框架项目，可指定输出到根目录而非子目录
     })
   ]
 };
 ```
+
+### 配置参数说明
+
+| 参数 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| `filename` | `string` | `'git.info'` | 生成的文件名 |
+| `outputDir` | `string` | 自动获取 | 输出目录路径。<br>• Webpack：默认使用 `output.path`<br>• Vite：默认使用 `build.outDir`<br>• 在 Nuxt 等框架中，可手动指定以避免文件输出到错误位置 |
 
 ## 📄 输出示例
 
