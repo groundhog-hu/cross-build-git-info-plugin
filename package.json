@@ -1,6 +1,6 @@
 {
   "name": "cross-build-git-info-plugin",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "一个跨平台的 Webpack 和 Vite 插件，用于在项目打包后，在输出目录中生成一个详细的 `git.info` 文件。",
   "main": "dist/index.cjs",
   "type": "module",
@@ -22,6 +22,14 @@
   ],
   "author": "groundhog-hu",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/groundhog-hu/cross-build-git-info-plugin.git"
+  },
+  "bugs": {
+    "url": "https://github.com/groundhog-hu/cross-build-git-info-plugin/issues"
+  },
+  "homepage": "https://github.com/groundhog-hu/cross-build-git-info-plugin#readme",
   "devDependencies": {
     "@rollup/plugin-commonjs": "^29.0.0",
     "@rollup/plugin-node-resolve": "^16.0.3",

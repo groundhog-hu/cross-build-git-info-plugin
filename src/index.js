@@ -1,4 +1,4 @@
-import { writeFileSync } from 'fs';
+import { writeFileSync, mkdirSync } from 'fs';
 import path from 'path';
 import { generateGitInfoContent } from './git-info-core.js';
 
@@ -10,6 +10,7 @@ const PLUGIN_NAME = 'GitInfoGeneratorPlugin';
 function writeFile(content, outputPath, filename) {
   const filePath = path.join(outputPath, filename);
   try {
+    mkdirSync(outputPath, { recursive: true });
     writeFileSync(filePath, content, 'utf-8');
     console.log(`\n✅ [${PLUGIN_NAME}] Git information file generated successfully at: ${filePath}`);
   } catch (e) {
