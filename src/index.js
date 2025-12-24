@@ -9,8 +9,8 @@ export class WebpackGitInfoPlugin {
   }
 
   apply(compiler) {
-    // 使用 emit 钩子，这是生成资源的标准时机
-    compiler.hooks.emit.tapAsync(PLUGIN_NAME, (compilation, callback) => {
+    // 定义处理函数
+    const emitHandler = (compilation, callback) => {
       try {
         const content = generateGitInfoContent();
 
@@ -25,7 +25,16 @@ export class WebpackGitInfoPlugin {
         compilation.errors.push(new Error(`[${PLUGIN_NAME}] Execution error: ${e.message}`));
         callback();
       }
-    });
+    };
+
+    // 兼容 webpack 3 和 webpack 4+
+    if (compiler.hooks) {
+      // Webpack 4+ 使用 hooks API
+      compiler.hooks.emit.tapAsync(PLUGIN_NAME, emitHandler);
+    } else {
+      // Webpack 3 使用旧的 plugin API
+      compiler.plugin('emit', emitHandler);
+    }
   }
 }
 
